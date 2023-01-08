@@ -34,7 +34,15 @@ static class Programm
         }
         sw.Stop();
         Console.WriteLine($"Поиск в [HashTable] {N / 10} случайных чисел занимает: {sw.ElapsedTicks * 100} нс.");
-        Console.WriteLine();
+
+        sw = new Stopwatch();
+        sw.Start();
+        for (int i = 0; i < (N / 10); i++)
+        {
+            table.Delete(rndNum[random.Next(0, rndNum.Length - 1)]);
+        }
+        sw.Stop();
+        Console.WriteLine($"Удаление в [HashTable] {N / 10} случайных чисел занимает: {sw.ElapsedTicks * 100} нс.");
     }
     static void OrderedNumbersPerformTest()
     {
@@ -59,7 +67,15 @@ static class Programm
         }
         sw.Stop();
         Console.WriteLine($"Поиск в [HashTable] {N / 10} случайных чисел занимает: {sw.ElapsedTicks * 100} нс.");
-        Console.WriteLine();
+
+        sw = new Stopwatch();
+        sw.Start();
+        for (int i = 0; i < (N / 10); i++)
+        {
+            table.Delete(orderNum[random.Next(0, orderNum.Length - 1)]);
+        }
+        sw.Stop();
+        Console.WriteLine($"Удаление в [HashTable] {N / 10} случайных чисел занимает: {sw.ElapsedTicks * 100} нс.");
     }
 
     static Random random = new Random();
