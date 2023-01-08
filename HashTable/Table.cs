@@ -7,18 +7,40 @@ using System.Threading.Tasks;
 
 namespace HashTable
 {
-    internal class Table
+    public class Table
     {
         FactorArray<Node> hashes;
         public Table()
         {
             hashes = new FactorArray<Node>();
-
         }
-
-        public void Delete()
+        public void Delete(int key)
         {
+            int hash = GetHash(key);
+            int count = 0;
+            Node H;
+            while (count < hashes.Size && hashes.Get(count).Key != hash)
+            {
+                count++;
+            }
+            if (count >= hashes.Size)
+                return;
+            H = hashes.Get(count);
 
+            Node c = H.Child;
+            if(c.Key == key)
+            {
+                H.Child = H.Child.Child;
+                return;
+            }
+            while (c.Child != null && c.Child.Key != key)
+            {
+                c = c.Child;
+            }
+
+            if (c.Child == null)
+                return;
+            c.Child = c.Child.Child;
         }
         public Node Search(int key)
         {
@@ -36,7 +58,7 @@ namespace HashTable
             H = hashes.Get(count);
 
             Node c = H.Child;
-            while (c.Key != key)
+            while (c != null && c.Key != key)
             {
                 c = c.Child;
             }
@@ -67,7 +89,6 @@ namespace HashTable
                 hashes.Add(searh);
             }
         }
-
         int GetHash(int key)
         {
             return key % ((int)Math.Log10(key) + 1);

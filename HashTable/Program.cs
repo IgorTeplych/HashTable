@@ -18,6 +18,10 @@ static class Programm
         table.Add(5815615);
         table.Add(581156);
 
-        var vr = table.Search(25858);
+        var vr = table.Search(258);
+
+        table.Delete(258);
+
+        vr = table.Search(258);
     }
 }
